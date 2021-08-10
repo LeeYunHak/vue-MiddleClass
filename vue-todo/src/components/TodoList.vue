@@ -2,9 +2,13 @@
   <div>
       <ul>
         <!-- v-for 돌릴거 in 투두아이템 배열만큼 돌림 v-for를 쓸때는 v-bind:key를 추가해야함  -->
-        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
+        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+          <!-- completed false 면 클래스 명안뜨고 true 면 추가 v-bind:class 동적으로 -->
+          <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
+            v-on:click="toggleComplete(todoItem, index)"></i>
           <!-- 콧수염 괄호로 찍으면 됨 -->
-          {{ todoItem }}
+          <!-- v-bind : html 속성에 동적인 값을 부여 completed 속성에 따라서 class명 부여함 현재 태그에선 false or true -->
+          <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
           <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
             <i class="fas fa-trash-alt"></i>
           </span>
@@ -28,6 +32,14 @@ export default {
       // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
       // 변경해서 새로운 배열은 반환
       this.todoItems.splice(index, 1);
+    },
+    toggleComplete : function(todoItem){
+      //설정 값 바꾸기 false - > true
+      todoItem.completed = !todoItem.completed;
+      // 로컬 스토리지 데이터 갱신 부분 삭제하고
+      localStorage.removeItem(todoItem.item);
+      // 다시 저장
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
@@ -35,16 +47,17 @@ export default {
     if ( localStorage.length > 0 ) {
       for (var i =0; i <localStorage.length ; i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          this.todoItems.push(localStorage.key(i));
+          //앞서 인풋에서 스트링으로 변환 시킨걸 다시 obj형으로 바꾸기위해 제이슨 팔스 해줌
+          this.todoItems.push((JSON.parse(localStorage.getItem(localStorage.key(i)))));
+          // this.todoItems.push(localStorage.key(i));
         }
-        // console.log(localStorage.key(i));
       }
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style-type: none;
   padding-left: 0px;
