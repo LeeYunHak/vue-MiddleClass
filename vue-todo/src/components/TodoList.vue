@@ -2,10 +2,10 @@
   <div>
       <ul>
         <!-- v-for 돌릴거 in 투두아이템 배열만큼 돌림 v-for를 쓸때는 v-bind:key를 추가해야함  -->
-        <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
           <!-- 콧수염 괄호로 찍으면 됨 -->
           {{ todoItem }}
-          <span class="removeBtn" v-on:click="removeTodo">
+          <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
             <i class="fas fa-trash-alt"></i>
           </span>
         </li>
@@ -21,8 +21,13 @@ export default {
     }
   },
   methods: {
-    removeTodo: function(){
-
+    removeTodo: function(todoItem, index){
+      console.log(todoItem,index);
+      // 로컬스토리지에 있는 항목 삭제 api
+      localStorage.removeItem(todoItem);
+      // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
+      // 변경해서 새로운 배열은 반환
+      this.todoItems.splice(index, 1);
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
