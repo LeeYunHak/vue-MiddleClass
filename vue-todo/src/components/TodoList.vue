@@ -25,13 +25,8 @@ export default {
       this.$emit('removeItem', todoItem, index);
       
     },
-    toggleComplete : function(todoItem){
-      //설정 값 바꾸기 false - > true
-      todoItem.completed = !todoItem.completed;
-      // 로컬 스토리지 데이터 갱신 부분 삭제하고
-      localStorage.removeItem(todoItem.item);
-      // 다시 저장
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    toggleComplete : function(todoItem, index){
+      this.$emit('toggleItem', todoItem, index)
     }
   },
   
