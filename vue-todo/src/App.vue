@@ -4,7 +4,7 @@
     <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트의 메서드 명"></TodoInput> -->
     <TodoInput v-on:addTodoItem="addOneItme"></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
-    <TodoList v-bind:propsdata= "todoItems" v-on:removeItem="removeOneItem"></TodoList>
+    <TodoList v-bind:propsdata= "todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -37,6 +37,15 @@ export default {
       // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
       // 변경해서 새로운 배열은 반환
       this.todoItems.splice(index, 1);
+    },
+    toggleOneItem: function(todoItem,index){
+      // todoItem.completed = !todoItem.completed;
+      // 넘겨온 todo 배열의 해당 index의 completd값에 접근 해서 바꾸기 윗라인 과 아래라인이 같은 동작을 하지만 아랫줄이 컴포넌트 간의 경계를 명확하게 함
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // 로컬 스토리지 데이터 갱신 부분 삭제하고
+      localStorage.removeItem(todoItem.item);
+      // 다시 저장
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
