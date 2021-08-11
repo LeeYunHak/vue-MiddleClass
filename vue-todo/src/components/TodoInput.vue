@@ -19,12 +19,8 @@ export default {
   methods: {
     addTodo: function(){
       if(this.newTodoItem !==''){
-        // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
-        var obj = {completed: false, item: this.newTodoItem};
-        // 저장하는 로직
-        // localStorage.setItem(키, 벨류)
-        // stringify == 오브젝트 스트링 값으로 바꿔줌
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // this.$emit('이벤트이름', 인자1, 인자2, ...)
+        this.$emit('addTodoItem', this.newTodoItem)
         this.clearInput();
       }
     },

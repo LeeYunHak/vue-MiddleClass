@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트의 메서드 명"></TodoInput> -->
+    <TodoInput v-on:addTodoItem="addOneItme"></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
     <TodoList v-bind:propsdata= "todoItems"></TodoList>
     <TodoFooter></TodoFooter>
@@ -18,6 +19,17 @@ export default {
   data : function(){
     return {
       todoItems: []
+    }
+  },
+  methods: {
+    addOneItme: function(todoItem){
+      // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
+        var obj = {completed: false, item: todoItem};
+        // 저장하는 로직
+        // localStorage.setItem(키, 벨류)
+        localStorage.setItem(todoItem, JSON.stringify(obj));
+        //push 배열 맨 끝에 배열요소 추가
+        this.todoItems.push(obj);
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
