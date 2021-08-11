@@ -22,12 +22,8 @@ export default {
   props: ['propsdata'],
   methods: {
     removeTodo: function(todoItem, index){
-      console.log(todoItem,index);
-      // 로컬스토리지에 있는 항목 삭제 api
-      localStorage.removeItem(todoItem);
-      // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
-      // 변경해서 새로운 배열은 반환
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
+      
     },
     toggleComplete : function(todoItem){
       //설정 값 바꾸기 false - > true
