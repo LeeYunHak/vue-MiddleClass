@@ -1,6 +1,6 @@
 <template>
   <div>
-      <ul>
+      <transition-group name="list" tag="ul">
         <!-- v-for 돌릴거 in 투두아이템 배열만큼 돌림 v-for를 쓸때는 v-bind:key를 추가해야함  -->
         <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
           <!-- completed false 면 클래스 명안뜨고 true 면 추가 v-bind:class 동적으로 -->
@@ -13,7 +13,7 @@
             <i class="fas fa-trash-alt"></i>
           </span>
         </li>
-      </ul>
+      </transition-group>
   </div>
 </template>
 
@@ -67,5 +67,13 @@ li{
 .textCompleted {
   text-decoration: line-through;
   color: #b3adad;
+}
+/* lㄹ스트 아이템 트렌지션 효과 */
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
