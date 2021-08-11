@@ -55,5 +55,6 @@ input:focus{
 .addBtn{
   color: white;
   vertical-align: middle;
+  cursor: pointer;
 }
 </style>

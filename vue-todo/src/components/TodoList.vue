@@ -53,11 +53,13 @@ li{
 .removeBtn{
   margin-left: auto;
   color: #b3adad;
+  cursor: pointer;
 }
 .checkBtn{
   line-height: 45px;
   color: #62acde;
   margin-right: 5px;
+  cursor: pointer;
 }
 .checkBtnCompleted{
   color: #b3adad;

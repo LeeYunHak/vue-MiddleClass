@@ -5,7 +5,7 @@
     <TodoInput v-on:addTodoItem="addOneItme"></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
     <TodoList v-bind:propsdata= "todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
 
@@ -46,6 +46,11 @@ export default {
       localStorage.removeItem(todoItem.item);
       // 다시 저장
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
+    clearAllItems: function(){
+      // 로컬스토리지에 모든 데이터 지우는 api
+      localStorage.clear();
+      this.todoItems = [];
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
