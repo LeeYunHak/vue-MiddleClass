@@ -16,13 +16,13 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
-  data : function(){
+  data(){
     return {
       todoItems: []
     }
   },
   methods: {
-    addOneItme: function(todoItem){
+    addOneItme(todoItem){
       // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
         const obj = {completed: false, item: todoItem};
         // 저장하는 로직
@@ -31,14 +31,14 @@ export default {
         //push 배열 맨 끝에 배열요소 추가
         this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index){
+    removeOneItem(todoItem, index){
       // 로컬스토리지에 있는 항목 삭제 api
       localStorage.removeItem(todoItem.item);
       // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
       // 변경해서 새로운 배열은 반환
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function(todoItem,index){
+    toggleOneItem(todoItem,index){
       // todoItem.completed = !todoItem.completed;
       // 넘겨온 todo 배열의 해당 index의 completd값에 접근 해서 바꾸기 윗라인 과 아래라인이 같은 동작을 하지만 아랫줄이 컴포넌트 간의 경계를 명확하게 함
       this.todoItems[index].completed = !this.todoItems[index].completed;
@@ -47,14 +47,14 @@ export default {
       // 다시 저장
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItems: function(){
+    clearAllItems(){
       // 로컬스토리지에 모든 데이터 지우는 api
       localStorage.clear();
       this.todoItems = [];
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
-  created: function(){
+  created(){
     if ( localStorage.length > 0 ) {
       for (let i =0; i <localStorage.length ; i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
