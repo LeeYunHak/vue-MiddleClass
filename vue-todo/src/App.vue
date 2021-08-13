@@ -24,7 +24,7 @@ export default {
   methods: {
     addOneItme: function(todoItem){
       // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
-        var obj = {completed: false, item: todoItem};
+        const obj = {completed: false, item: todoItem};
         // 저장하는 로직
         // localStorage.setItem(키, 벨류)
         localStorage.setItem(todoItem, JSON.stringify(obj));
@@ -56,7 +56,7 @@ export default {
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
   created: function(){
     if ( localStorage.length > 0 ) {
-      for (var i =0; i <localStorage.length ; i++){
+      for (let i =0; i <localStorage.length ; i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
           //앞서 인풋에서 스트링으로 변환 시킨걸 다시 obj형으로 바꾸기위해 제이슨 팔스 해줌
           this.todoItems.push((JSON.parse(localStorage.getItem(localStorage.key(i)))));
