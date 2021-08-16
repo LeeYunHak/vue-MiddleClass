@@ -54,17 +54,7 @@ export default {
     }
   },
   // created 뷰 라이프 사이클 중 하나, 뷰 인스턴스가 생성되자마자 호출되는 훅, 생성되는 시점에 이안에 로직이 호출됨 
-  created(){
-    if ( localStorage.length > 0 ) {
-      for (let i =0; i <localStorage.length ; i++){
-        if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          //앞서 인풋에서 스트링으로 변환 시킨걸 다시 obj형으로 바꾸기위해 제이슨 팔스 해줌
-          this.todoItems.push((JSON.parse(localStorage.getItem(localStorage.key(i)))));
-          // this.todoItems.push(localStorage.key(i));
-        }
-      }
-    }
-  },
+  
   components: {
     // 컴포넌트 태그명 : 컴포넌트 내용
     TodoHeader,

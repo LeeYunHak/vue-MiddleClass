@@ -2,7 +2,7 @@
   <div>
       <transition-group name="list" tag="ul">
         <!-- v-for 돌릴거 in 투두아이템 배열만큼 돌림 v-for를 쓸때는 v-bind:key를 추가해야함  -->
-        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+        <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
           <!-- completed false 면 클래스 명안뜨고 true 면 추가 v-bind:class 동적으로 -->
           <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
             v-on:click="toggleComplete(todoItem, index)"></i>
