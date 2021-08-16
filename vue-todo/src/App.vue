@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트의 메서드 명"></TodoInput> -->
-    <TodoInput v-on:addTodoItem="addOneItme"></TodoInput>
+    <TodoInput></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
     <TodoList v-bind:propsdata= "todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
     <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
@@ -22,15 +22,15 @@ export default {
     }
   },
   methods: {
-    addOneItme(todoItem){
-      // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
-        const obj = {completed: false, item: todoItem};
-        // 저장하는 로직
-        // localStorage.setItem(키, 벨류)
-        localStorage.setItem(todoItem, JSON.stringify(obj));
-        //push 배열 맨 끝에 배열요소 추가
-        this.todoItems.push(obj);
-    },
+    // addOneItme(todoItem){
+    //   // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
+    //     const obj = {completed: false, item: todoItem};
+    //     // 저장하는 로직
+    //     // localStorage.setItem(키, 벨류)
+    //     localStorage.setItem(todoItem, JSON.stringify(obj));
+    //     //push 배열 맨 끝에 배열요소 추가
+    //     this.todoItems.push(obj);
+    // },
     removeOneItem(todoItem, index){
       // 로컬스토리지에 있는 항목 삭제 api
       localStorage.removeItem(todoItem.item);

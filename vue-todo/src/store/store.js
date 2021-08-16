@@ -25,4 +25,15 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch()
   },
+  mutations: {
+    addOneItme(state, todoItem){
+        // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
+        const obj = {completed: false, item: todoItem};
+        // 저장하는 로직
+        // localStorage.setItem(키, 벨류)
+        localStorage.setItem(todoItem, JSON.stringify(obj));
+        //push 배열 맨 끝에 배열요소 추가
+        state.todoItems.push(obj);
+    }
+  }
 });

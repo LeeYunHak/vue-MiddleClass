@@ -19,7 +19,6 @@
 
 <script>
 export default {
-  props: ['propsdata'],
   methods: {
     removeTodo(todoItem, index){
       this.$emit('removeItem', todoItem, index);
