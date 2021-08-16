@@ -4,7 +4,7 @@
     <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트의 메서드 명"></TodoInput> -->
     <TodoInput></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
-    <TodoList v-bind:propsdata= "todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
+    <TodoList v-bind:propsdata= "todoItems" v-on:toggleItem="toggleOneItem"></TodoList>
     <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
@@ -31,13 +31,13 @@ export default {
     //     //push 배열 맨 끝에 배열요소 추가
     //     this.todoItems.push(obj);
     // },
-    removeOneItem(todoItem, index){
-      // 로컬스토리지에 있는 항목 삭제 api
-      localStorage.removeItem(todoItem.item);
-      // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
-      // 변경해서 새로운 배열은 반환
-      this.todoItems.splice(index, 1);
-    },
+    // removeOneItem(todoItem, index){
+    //   // 로컬스토리지에 있는 항목 삭제 api
+    //   localStorage.removeItem(todoItem.item);
+    //   // js 배열 api splice 특정 인덱스에서 하나를 지울 수 있다.
+    //   // 변경해서 새로운 배열은 반환
+    //   this.todoItems.splice(index, 1);
+    // },
     toggleOneItem(todoItem,index){
       // todoItem.completed = !todoItem.completed;
       // 넘겨온 todo 배열의 해당 index의 completd값에 접근 해서 바꾸기 윗라인 과 아래라인이 같은 동작을 하지만 아랫줄이 컴포넌트 간의 경계를 명확하게 함
