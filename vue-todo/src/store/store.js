@@ -40,5 +40,22 @@ export const store = new Vuex.Store({
       // 변경해서 새로운 배열은 반환
       state.todoItems.splice(payload.index, 1);
     },
+    toggleOneItem(state, payload) {
+      // todoItem.completed = !todoItem.completed;
+      // 넘겨온 todo 배열의 해당 index의 completd값에 접근 해서 바꾸기 윗라인 과 아래라인이 같은 동작을 하지만 아랫줄이 컴포넌트 간의 경계를 명확하게 함
+      state.todoItems[payload.index].completed = !state.todoItems[payload.index]
+        .completed;
+      // 로컬 스토리지 데이터 갱신 부분 삭제하고
+      localStorage.removeItem(payload.todoItem.item);
+      // 다시 저장
+      localStorage.setItem(
+        payload.todoItem.item,
+        JSON.stringify(payload.todoItem)
+      );
+    },
+    clearAllItems(state) {
+      localStorage.clear();
+      state.todoItems = [];
+    },
   },
 });
