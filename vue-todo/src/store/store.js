@@ -23,6 +23,11 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch(),
   },
+  getters: {
+    storedTodoItems(state){
+      return state.todoItems;
+    }
+  },
   mutations: {
     addOneItme(state, todoItem) {
       // 텍스트 체크 진입값 추가 될때 false로 들어가게 끔
