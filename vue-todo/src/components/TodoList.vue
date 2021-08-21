@@ -5,7 +5,7 @@
         <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
           <!-- completed false 면 클래스 명안뜨고 true 면 추가 v-bind:class 동적으로 -->
           <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
-            v-on:click="toggleComplete(todoItem, index)"></i>
+            v-on:click="toggleComplete({todoItem, index})"></i>
           <!-- 콧수염 괄호로 찍으면 됨 -->
           <!-- v-bind : html 속성에 동적인 값을 부여 completed 속성에 따라서 class명 부여함 현재 태그에선 false or true -->
           <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
@@ -23,13 +23,14 @@ export default {
   methods: {
     ...mapMutations({
       removeTodo: 'removeOneItem',
+      toggleComplete: 'toggleOneItem'
     }),
     // removeTodo(todoItem, index){
     //   this.$store.commit('removeOneItem',{todoItem, index}); //이벤트로 안올리고 바로 store로 removeOneItem 호출, 객체 바로 보냄
     // },
-    toggleComplete(todoItem, index){
-      this.$store.commit('toggleOneItem', {todoItem, index});
-    }
+    // toggleComplete(todoItem, index){
+    //   this.$store.commit('toggleOneItem', {todoItem, index});
+    // }
   },
   computed: {
     // todoItems(){
