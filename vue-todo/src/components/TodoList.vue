@@ -2,14 +2,14 @@
   <div>
       <transition-group name="list" tag="ul">
         <!-- v-for 돌릴거 in 투두아이템 배열만큼 돌림 v-for를 쓸때는 v-bind:key를 추가해야함  -->
-        <li v-for="(todoItem, index) in this.todoItems" v-bind:key="todoItem.item" class="shadow">
+        <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
           <!-- completed false 면 클래스 명안뜨고 true 면 추가 v-bind:class 동적으로 -->
           <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
             v-on:click="toggleComplete(todoItem, index)"></i>
           <!-- 콧수염 괄호로 찍으면 됨 -->
           <!-- v-bind : html 속성에 동적인 값을 부여 completed 속성에 따라서 class명 부여함 현재 태그에선 false or true -->
           <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-          <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+          <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
             <i class="fas fa-trash-alt"></i>
           </span>
         </li>
@@ -18,12 +18,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   methods: {
-    removeTodo(todoItem, index){
-      this.$store.commit('removeOneItem',{todoItem, index}); //이벤트로 안올리고 바로 store로 removeOneItem 호출, 객체 바로 보냄
-    },
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+    }),
+    // removeTodo(todoItem, index){
+    //   this.$store.commit('removeOneItem',{todoItem, index}); //이벤트로 안올리고 바로 store로 removeOneItem 호출, 객체 바로 보냄
+    // },
     toggleComplete(todoItem, index){
       this.$store.commit('toggleOneItem', {todoItem, index});
     }
@@ -33,9 +36,7 @@ export default {
     //   return this.$store.getters.storedTodoItems
     // }
     // ...mapGetters(['storedTodoItems'])
-    ...mapGetters({
-      todoItems: 'storedTodoItems'
-    })
+    ...mapGetters(['storedTodoItems'])
   }
   
 }
