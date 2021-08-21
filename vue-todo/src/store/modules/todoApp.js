@@ -20,7 +20,7 @@ const state = {
 
 const getters = {
   storedTodoItems(state) {
-    return state.storedTodoItems;
+    return state.todoItems;
   },
 };
 
