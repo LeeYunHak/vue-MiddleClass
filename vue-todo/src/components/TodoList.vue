@@ -24,19 +24,9 @@ export default {
     ...mapMutations({
       removeTodo: 'removeOneItem',
       toggleComplete: 'toggleOneItem'
-    })
-    // removeTodo(todoItem, index){
-    //   this.$store.commit('removeOneItem',{todoItem, index}); //이벤트로 안올리고 바로 store로 removeOneItem 호출, 객체 바로 보냄
-    // },
-    // toggleComplete(todoItem, index){
-    //   this.$store.commit('toggleOneItem', {todoItem, index});
-    // }
+    }),
   },
   computed: {
-    // todoItems(){
-    //   return this.$store.getters.storedTodoItems
-    // }
-    // ...mapGetters(['storedTodoItems'])
     ...mapGetters(['storedTodoItems'])
   }
   
